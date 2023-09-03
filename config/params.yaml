@@ -4,6 +4,7 @@ base:
 data:
   raw_csv: 'data/raw/iris.csv'
   features_csv: 'data/processed/featured_iris.csv'
+  classes: ['setosa', 'versicolor', 'virginica']
 
 data_split:
   random_state: 42
