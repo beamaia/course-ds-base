@@ -1,19 +1,24 @@
 base:
-  seed: 42
-
-data_load:
-  dataset_csv: 'data/raw/iris.csv'
+  root: 'C:\Users\beatriz.maia\Documents\studies\course-ds-base'
+  
+data:
+  raw_csv: 'data/raw/iris.csv'
+  features_csv: 'data/processed/featured_iris.csv'
 
 data_split:
-  test_size:
+  random_state: 42
+  test_size: 0.2
   trainset_path: 'data/processed/train_iris.csv'
   testset_path:  'data/processed/test_iris.csv'
 
 train:
-  cv:
   estimator_name: logreg
   C: 0.001
   max_iter: 100
   solver: 'lbfgs'
-  multiclass: 'multinomial'
+  multi_class: 'multinomial'
   model_path: models/model.joblib
+
+reports:
+  cm_path: 'reports/confusion_matrix.png'
+  metrics_path: 'reports/metrics.json'
