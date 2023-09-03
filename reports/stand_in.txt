@@ -1,1 +1,0 @@
-Originally this is added to .gitignore. Just adding in order to record structure, given that this is based on the cookiecuter format.
