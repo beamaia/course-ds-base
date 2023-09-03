@@ -1,0 +1,19 @@
+base:
+  seed: 42
+
+data_load:
+  dataset_csv: 'data/raw/iris.csv'
+
+data_split:
+  test_size:
+  trainset_path: 'data/processed/train_iris.csv'
+  testset_path:  'data/processed/test_iris.csv'
+
+train:
+  cv:
+  estimator_name: logreg
+  C: 0.001
+  max_iter: 100
+  solver: 'lbfgs'
+  multiclass: 'multinomial'
+  model_path: models/model.joblib
