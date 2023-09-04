@@ -60,6 +60,11 @@ stages:
       - reports
     outs:
     - reports/confusion_matrix.png
+    plots:
+    - reports/confusion_matrix.csv:
+        template: confusion
+        y: y_true
+        x: predicted
     metrics:
     - reports/metrics.json:
         cache: false

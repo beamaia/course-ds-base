@@ -11,6 +11,19 @@ from typing import Text
 
 from src.report.visualize import plot_confusion_matrix
 
+def convert_to_labels(indexes, labels):
+    result = []
+    for i in indexes:
+        result.append(labels[i])
+    return result
+
+def write_confusion_matrix_data(y_true, predicted, labels, filename):
+    assert len(predicted) == len(y_true)
+    predicted_labels = convert_to_labels(predicted, labels)
+    true_labels = convert_to_labels(y_true, labels)
+    cf = pd.DataFrame(list(zip(true_labels, predicted_labels)), columns=["y_true", "predicted"])
+    cf.to_csv(filename, index=False)
+
 def evaluate(config_path: Text) -> None:
     with open(config_path, 'r') as conf_file:
         config = yaml.safe_load(conf_file)
@@ -41,8 +54,13 @@ def evaluate(config_path: Text) -> None:
             indent=4
         )
 
-    cm_plot = plot_confusion_matrix(cm, config['data']['classes'], normalize=False)
-    confusion_matrix_image = pl.Path(config['base']['root'], config['reports']['cm_path'])
+    labels = config['data']['classes']
+    cm_plot = plot_confusion_matrix(cm, labels, normalize=False)
+
+    confusion_matrix_image = pl.Path(config['base']['root'], config['reports']['cm_img_path'])
+    confusion_matrix_data_path = pl.Path(config['base']['root'], config['reports']['cm_csv_path'])
+
+    write_confusion_matrix_data(y_test, prediction, labels=labels, filename=confusion_matrix_data_path)
     cm_plot.savefig(confusion_matrix_image)
 
 if __name__ == "__main__":

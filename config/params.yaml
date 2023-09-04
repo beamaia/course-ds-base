@@ -21,5 +21,6 @@ train:
   model_path: models/model.joblib
 
 reports:
-  cm_path: 'reports/confusion_matrix.png'
+  cm_img_path: 'reports/confusion_matrix.png'
+  cm_csv_path: 'reports/confusion_matrix.csv'
   metrics_path: 'reports/metrics.json'

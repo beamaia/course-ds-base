@@ -135,8 +135,8 @@ stages:
       size: 2860
     - path: src/stages/evaluate.py
       hash: md5
-      md5: 616198bcec4b9072cfd8f16087d6079c
-      size: 1694
+      md5: 1a770234929ae66a28d9bb731a60ac21
+      size: 2429
     params:
       config/params.yaml:
         base:
@@ -154,7 +154,8 @@ stages:
           trainset_path: data/processed/train_iris.csv
           testset_path: data/processed/test_iris.csv
         reports:
-          cm_path: reports/confusion_matrix.png
+          cm_img_path: reports/confusion_matrix.png
+          cm_csv_path: reports/confusion_matrix.csv
           metrics_path: reports/metrics.json
     outs:
     - path: reports/confusion_matrix.png
