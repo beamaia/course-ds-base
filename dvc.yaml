@@ -1,0 +1,63 @@
+stages:
+  data_load:
+    cmd: python src/stages/data_load.py --config=config/params.yaml
+    deps:
+    - src/stages/data_load.py
+    params:
+    - config/params.yaml:
+      - base
+      - data
+    outs:
+    - data/raw/iris.csv
+  featurize:
+    cmd: python src/stages/feature.py --config=config/params.yaml
+    deps:
+    - src/stages/feature.py
+    - data/raw/iris.csv
+    params:
+    - config/params.yaml:
+      - base
+      - data
+    outs:
+    - data/processed/featured_iris.csv
+  split:
+    cmd: python src/stages/data_split.py --config=config/params.yaml
+    deps:
+    - src/stages/data_split.py
+    - data/processed/featured_iris.csv
+    params:
+    - config/params.yaml:
+      - base
+      - data
+      - data_split
+    outs:
+    - data/processed/train_iris.csv
+    - data/processed/test_iris.csv
+  train:
+    cmd: python src/stages/train.py --config=config/params.yaml
+    deps:
+    - src/stages/train.py
+    - data/processed/train_iris.csv
+    params:
+    - config/params.yaml:
+      - base
+      - data_split
+      - train
+    outs:
+    - models/model.joblib
+  evaluate:
+    cmd: python -m src.stages.evaluate --config=config/params.yaml
+    deps:
+    - src/stages/evaluate.py
+    - src/report/visualize.py
+    - data/processed/test_iris.csv
+    - models/model.joblib
+    params:
+    - config/params.yaml:
+      - base
+      - data
+      - data_split
+      - reports
+    outs:
+    - reports/confusion_matrix.png
+    - reports/metrics.json
