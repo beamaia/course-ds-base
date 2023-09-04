@@ -60,4 +60,7 @@ stages:
       - reports
     outs:
     - reports/confusion_matrix.png
-    - reports/metrics.json
+    metrics:
+    - reports/metrics.json:
+        cache: false
+   
