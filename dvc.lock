@@ -74,25 +74,25 @@ stages:
           - virginica
         data_split:
           random_state: 42
-          test_size: 0.3
+          test_size: 0.5
           trainset_path: data/processed/train_iris.csv
           testset_path: data/processed/test_iris.csv
     outs:
     - path: data/processed/test_iris.csv
       hash: md5
-      md5: 8a60c6fe18765c832a89021ea1fadf40
-      size: 2333
+      md5: 0024b916dae32b5161d37b62bded62fd
+      size: 3825
     - path: data/processed/train_iris.csv
       hash: md5
-      md5: 8c318678391cc0f05ad65badedd267aa
-      size: 5527
+      md5: fb634758e304ea76d07974c47f075c84
+      size: 4035
   train:
     cmd: python src/stages/train.py --config=config/params.yaml
     deps:
     - path: data/processed/train_iris.csv
       hash: md5
-      md5: 8c318678391cc0f05ad65badedd267aa
-      size: 5527
+      md5: fb634758e304ea76d07974c47f075c84
+      size: 4035
     - path: src/stages/train.py
       hash: md5
       md5: 66e74c06532ebb678663c12822dff136
@@ -103,7 +103,7 @@ stages:
           root: C:\Users\beatriz.maia\Documents\studies\course-ds-base
         data_split:
           random_state: 42
-          test_size: 0.3
+          test_size: 0.5
           trainset_path: data/processed/train_iris.csv
           testset_path: data/processed/test_iris.csv
         train:
@@ -116,18 +116,18 @@ stages:
     outs:
     - path: models/model.joblib
       hash: md5
-      md5: 44d74aa4c9e93e4a1e92a270068fccf5
+      md5: ba1f2d93f74f0863e6a42100cbc0d061
       size: 1023
   evaluate:
     cmd: python -m src.stages.evaluate --config=config/params.yaml
     deps:
     - path: data/processed/test_iris.csv
       hash: md5
-      md5: 8a60c6fe18765c832a89021ea1fadf40
-      size: 2333
+      md5: 0024b916dae32b5161d37b62bded62fd
+      size: 3825
     - path: models/model.joblib
       hash: md5
-      md5: 44d74aa4c9e93e4a1e92a270068fccf5
+      md5: ba1f2d93f74f0863e6a42100cbc0d061
       size: 1023
     - path: src/report/visualize.py
       hash: md5
@@ -150,7 +150,7 @@ stages:
           - virginica
         data_split:
           random_state: 42
-          test_size: 0.3
+          test_size: 0.5
           trainset_path: data/processed/train_iris.csv
           testset_path: data/processed/test_iris.csv
         reports:
@@ -159,8 +159,8 @@ stages:
     outs:
     - path: reports/confusion_matrix.png
       hash: md5
-      md5: f992e0e0492888226068598a4d68c318
-      size: 27668
+      md5: c279d0c83b7f1edc4ffea8ab689a4977
+      size: 25978
     - path: reports/metrics.json
       hash: md5
       md5: 1544e98811fb0946ea6cccbfcf4cbeb4
