@@ -74,25 +74,25 @@ stages:
           - virginica
         data_split:
           random_state: 42
-          test_size: 0.4
+          test_size: 0.9
           trainset_path: data/processed/train_iris.csv
           testset_path: data/processed/test_iris.csv
     outs:
     - path: data/processed/test_iris.csv
       hash: md5
-      md5: 0245530691b8a93a623d01e4ab9fb874
-      size: 3064
+      md5: 61845329ff2029f1c4bdc8c9b27937c8
+      size: 6921
     - path: data/processed/train_iris.csv
       hash: md5
-      md5: 0407b4b0310a0ba051bb3b1807040443
-      size: 4796
+      md5: ce66c30f799001dfda44dfb0ff56aa9e
+      size: 939
   train:
     cmd: python src/stages/train.py --config=config/params.yaml
     deps:
     - path: data/processed/train_iris.csv
       hash: md5
-      md5: 0407b4b0310a0ba051bb3b1807040443
-      size: 4796
+      md5: ce66c30f799001dfda44dfb0ff56aa9e
+      size: 939
     - path: src/stages/train.py
       hash: md5
       md5: 66e74c06532ebb678663c12822dff136
@@ -103,31 +103,31 @@ stages:
           root: C:\Users\beatriz.maia\Documents\studies\course-ds-base
         data_split:
           random_state: 42
-          test_size: 0.4
+          test_size: 0.9
           trainset_path: data/processed/train_iris.csv
           testset_path: data/processed/test_iris.csv
         train:
           estimator_name: logreg
-          C: 0.001
-          max_iter: 100
+          C: 0.1
+          max_iter: 250
           solver: lbfgs
           multi_class: multinomial
           model_path: models/model.joblib
     outs:
     - path: models/model.joblib
       hash: md5
-      md5: 3d86c337811ff10d7d2f36448e36d7ba
+      md5: ebfdf7385ff0daebf3f733110e7e658f
       size: 1023
   evaluate:
     cmd: python -m src.stages.evaluate --config=config/params.yaml
     deps:
     - path: data/processed/test_iris.csv
       hash: md5
-      md5: 0245530691b8a93a623d01e4ab9fb874
-      size: 3064
+      md5: 61845329ff2029f1c4bdc8c9b27937c8
+      size: 6921
     - path: models/model.joblib
       hash: md5
-      md5: 3d86c337811ff10d7d2f36448e36d7ba
+      md5: ebfdf7385ff0daebf3f733110e7e658f
       size: 1023
     - path: src/report/visualize.py
       hash: md5
@@ -150,7 +150,7 @@ stages:
           - virginica
         data_split:
           random_state: 42
-          test_size: 0.4
+          test_size: 0.9
           trainset_path: data/processed/train_iris.csv
           testset_path: data/processed/test_iris.csv
         reports:
@@ -159,9 +159,9 @@ stages:
     outs:
     - path: reports/confusion_matrix.png
       hash: md5
-      md5: b528bff913033cac233cf516c2f016d6
-      size: 25302
+      md5: f62c16b04f7efd4d9a96f3668f9d16cb
+      size: 27670
     - path: reports/metrics.json
       hash: md5
-      md5: 1544e98811fb0946ea6cccbfcf4cbeb4
-      size: 19
+      md5: 1af8222a03fe8b6ea881bf4e8c517492
+      size: 34

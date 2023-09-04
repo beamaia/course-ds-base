@@ -8,14 +8,14 @@ data:
 
 data_split:
   random_state: 42
-  test_size: 0.4
+  test_size: 0.9
   trainset_path: 'data/processed/train_iris.csv'
   testset_path:  'data/processed/test_iris.csv'
 
 train:
   estimator_name: logreg
-  C: 0.001
-  max_iter: 100
+  C: 0.1
+  max_iter: 250
   solver: 'lbfgs'
   multi_class: 'multinomial'
   model_path: models/model.joblib
